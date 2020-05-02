@@ -9,10 +9,11 @@ mongoose.connect('mongodb+srv://alexgcunha:alexcunha123@cluster0-pv31b.mongodb.n
 })
 
 
+
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use('/pets', express.static(path.resolve(__dirname, '..', 'temp')))
+app.use('/file', express.static(path.resolve(__dirname, '..', 'temp')))
 app.use(routes)
 
 app.listen(3333, ()=> {
