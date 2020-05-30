@@ -6,8 +6,6 @@ module.exports = {
         const { name_pet, age, description,  latitude,longitude} = request.body 
         const users_id = request.headers.authorization
         const {originalname:avatar_pets, key: avatar_path} = request.file
-      
-       
         const [id] = await connection('pets').insert({
             name_pet,
             age,
@@ -29,11 +27,11 @@ module.exports = {
 
     },
     async index(request, response){
+        const path_url = process.env.URL
         const users_id = request.userId
         const pets = await connection('pets').where('users_id', users_id).select('*')
         const {id, age,name_pet, description, avatar_pets, avatar_path} = pets[0]
-        const url =  `http://localhost:3333/pets/${encodeURIComponent(avatar_path)}`
-
+        const url =  `${path_url}/pets/${encodeURIComponent(avatar_path)}`
         const {_id, location} = await PestsLocations.findOne({users_id})
         const latitude = location.coordinates[1]
         const longitude = location.coordinates[0]

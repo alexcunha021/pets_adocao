@@ -1,9 +1,13 @@
 const express = require('express')
 const mongoose = require('mongoose')
+require('dotenv/config')
 const routes = require('./routes')
 const path = require('path')
 
-mongoose.connect('mongodb+srv://alexgcunha:alexcunha123@cluster0-pv31b.mongodb.net/pets?retryWrites=true&w=majority', {
+const mongo_pas = process.env.MONGO_PAS
+
+console.log(mongo_pas)
+mongoose.connect(mongo_pas, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })

@@ -13,10 +13,11 @@ module.exports = {
         response.json({ message: 'Cadastro'})
     },
     async index(request, response){
+        const path_url = process.env.URL
         const users_id = request.userId
         const avatars = await connection('avatar').where('users_id', users_id).select('*').first()
         const  { avatar, avatar_path } = avatars
-        const url =  `http://localhost:3333/pets/${encodeURIComponent(avatar_path)}`
+        const url =  `${path_url}/pets/${encodeURIComponent(avatar_path)}`
         
         response.json({avatarUser: {
             url
